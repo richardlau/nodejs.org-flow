@@ -36,3 +36,6 @@ flowchart TD
     purge-->cloudflare
 
 ```
+
+Reference image
+![Original reference flow](https://raw.githubusercontent.com/richardlau/nodejs.org-flow/main/release%20process.svg)
