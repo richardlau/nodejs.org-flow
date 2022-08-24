@@ -1,4 +1,4 @@
-Experimenting with mermaid to document the flow for how nodejs.org currently works.
+Experimenting with mermaid to document the flow for how the release process and nodejs.org currently works.
 ```mermaid
 flowchart TD
     
