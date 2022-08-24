@@ -31,7 +31,7 @@ flowchart TD
     A-->builds(release builds)
     gh-.->webhook
     promote-->promotion
-    blog-->gh
+    blog-->|pull request|gh
     builds-->staging
     purge-->cloudflare
 
