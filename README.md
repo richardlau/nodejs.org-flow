@@ -1,35 +1,31 @@
 Experimenting with mermaid to document the flow for how the release process and nodejs.org currently works.
 ```mermaid
 flowchart TD
-    
-    subgraph "user"
+    subgraph user[Releaser]
     start([Start])-->A(Start release build)--> promote(promote)-->blog(create blog post)-->F([End])
     end
     subgraph jenkins[Release CI]
     builds
     end
     subgraph github[GitHub]
-    gh
+    gh[nodejs/nodejs.org]
     end
     subgraph www[www server]
-    
       staging[(staging)] --> promotion -->dist[(dist)]
       dist-->rebuildIdx(rebuild index)
       
       subgraph chkIndex[Check index]
-      checkIndex(Check index)-->idxChanged{Index Changed}
-      idxChanged--No-->checkIndex
-      
+      idxChanged{Index Changed}--No-->idxChanged
       end
-      rebuildIdx-.->checkIndex
+      
+      rebuildIdx-.->idxChanged
       webhook-->rebuild
       idxChanged--Yes-->rebuild(Rebuild website)
       rebuild-->cdnq(queue cdn purge)
       cdnq-->purge(cdn purge)
-      
-      end
+    end
     A-->builds(release builds)
-    gh[nodejs/nodejs.org]-.->webhook
+    gh-.->webhook
     promote-->promotion
     blog-->gh
     builds-->staging
