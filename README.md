@@ -21,7 +21,7 @@ flowchart TD
       idxChanged--No-->checkIndex
       
       end
-      rebuildIdx-.->chkIndex
+      rebuildIdx-.->checkIndex
       webhook-->rebuild
       idxChanged--Yes-->rebuild(Rebuild website)
       rebuild-->cdnq(queue cdn purge)
