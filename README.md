@@ -21,8 +21,12 @@ flowchart TD
       rebuildIdx-.->idxChanged
       webhook-->rebuild
       idxChanged--Yes-->rebuild(Rebuild website)
-      rebuild-->cdnq(queue cdn purge)
-      cdnq-->purge(cdn purge)
+      rebuild-->queueCDN[queue cdn purge]-.->purgeQueued
+      subgraph cdn[CDN purge queue]
+        purgeQueued{CDN purge queued?}
+        purgeQueued--No-->purgeQueued
+        purgeQueued--Yes-->purge(cdn purge)
+      end
     end
     A-->builds(release builds)
     gh-.->webhook
